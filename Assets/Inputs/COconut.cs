@@ -35,6 +35,24 @@ public partial class @COconut : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Attack"",
+                    ""type"": ""Button"",
+                    ""id"": ""108ba3b3-9dac-4727-992a-9d27a24663f9"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Jump"",
+                    ""type"": ""Button"",
+                    ""id"": ""8a953f5d-9614-4dc2-8b18-9577d10ce2d3"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -92,6 +110,28 @@ public partial class @COconut : IInputActionCollection2, IDisposable
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1d54f0a4-3052-46c1-824f-06facd2b869d"",
+                    ""path"": ""<Keyboard>/f"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Attack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c29b8183-4781-42c7-927f-59e49f134ab2"",
+                    ""path"": ""<Keyboard>/g"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Jump"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -107,6 +147,24 @@ public partial class @COconut : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Attack"",
+                    ""type"": ""Button"",
+                    ""id"": ""f3b662d3-517c-4a03-aee1-1862a757b32f"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Jump"",
+                    ""type"": ""Button"",
+                    ""id"": ""0bdc44c1-2550-4bee-b449-1d848495df0e"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -164,6 +222,28 @@ public partial class @COconut : IInputActionCollection2, IDisposable
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8478f0d9-6906-4648-ae8f-b5a89da0d115"",
+                    ""path"": ""<Keyboard>/l"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Attack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""80fc8afa-9a54-415f-a1c9-8285605a570b"",
+                    ""path"": ""<Keyboard>/semicolon"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Jump"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -750,9 +830,13 @@ public partial class @COconut : IInputActionCollection2, IDisposable
         // P1
         m_P1 = asset.FindActionMap("P1", throwIfNotFound: true);
         m_P1_Move = m_P1.FindAction("Move", throwIfNotFound: true);
+        m_P1_Attack = m_P1.FindAction("Attack", throwIfNotFound: true);
+        m_P1_Jump = m_P1.FindAction("Jump", throwIfNotFound: true);
         // P2
         m_P2 = asset.FindActionMap("P2", throwIfNotFound: true);
         m_P2_Move = m_P2.FindAction("Move", throwIfNotFound: true);
+        m_P2_Attack = m_P2.FindAction("Attack", throwIfNotFound: true);
+        m_P2_Jump = m_P2.FindAction("Jump", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -825,11 +909,15 @@ public partial class @COconut : IInputActionCollection2, IDisposable
     private readonly InputActionMap m_P1;
     private IP1Actions m_P1ActionsCallbackInterface;
     private readonly InputAction m_P1_Move;
+    private readonly InputAction m_P1_Attack;
+    private readonly InputAction m_P1_Jump;
     public struct P1Actions
     {
         private @COconut m_Wrapper;
         public P1Actions(@COconut wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_P1_Move;
+        public InputAction @Attack => m_Wrapper.m_P1_Attack;
+        public InputAction @Jump => m_Wrapper.m_P1_Jump;
         public InputActionMap Get() { return m_Wrapper.m_P1; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -842,6 +930,12 @@ public partial class @COconut : IInputActionCollection2, IDisposable
                 @Move.started -= m_Wrapper.m_P1ActionsCallbackInterface.OnMove;
                 @Move.performed -= m_Wrapper.m_P1ActionsCallbackInterface.OnMove;
                 @Move.canceled -= m_Wrapper.m_P1ActionsCallbackInterface.OnMove;
+                @Attack.started -= m_Wrapper.m_P1ActionsCallbackInterface.OnAttack;
+                @Attack.performed -= m_Wrapper.m_P1ActionsCallbackInterface.OnAttack;
+                @Attack.canceled -= m_Wrapper.m_P1ActionsCallbackInterface.OnAttack;
+                @Jump.started -= m_Wrapper.m_P1ActionsCallbackInterface.OnJump;
+                @Jump.performed -= m_Wrapper.m_P1ActionsCallbackInterface.OnJump;
+                @Jump.canceled -= m_Wrapper.m_P1ActionsCallbackInterface.OnJump;
             }
             m_Wrapper.m_P1ActionsCallbackInterface = instance;
             if (instance != null)
@@ -849,6 +943,12 @@ public partial class @COconut : IInputActionCollection2, IDisposable
                 @Move.started += instance.OnMove;
                 @Move.performed += instance.OnMove;
                 @Move.canceled += instance.OnMove;
+                @Attack.started += instance.OnAttack;
+                @Attack.performed += instance.OnAttack;
+                @Attack.canceled += instance.OnAttack;
+                @Jump.started += instance.OnJump;
+                @Jump.performed += instance.OnJump;
+                @Jump.canceled += instance.OnJump;
             }
         }
     }
@@ -858,11 +958,15 @@ public partial class @COconut : IInputActionCollection2, IDisposable
     private readonly InputActionMap m_P2;
     private IP2Actions m_P2ActionsCallbackInterface;
     private readonly InputAction m_P2_Move;
+    private readonly InputAction m_P2_Attack;
+    private readonly InputAction m_P2_Jump;
     public struct P2Actions
     {
         private @COconut m_Wrapper;
         public P2Actions(@COconut wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_P2_Move;
+        public InputAction @Attack => m_Wrapper.m_P2_Attack;
+        public InputAction @Jump => m_Wrapper.m_P2_Jump;
         public InputActionMap Get() { return m_Wrapper.m_P2; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -875,6 +979,12 @@ public partial class @COconut : IInputActionCollection2, IDisposable
                 @Move.started -= m_Wrapper.m_P2ActionsCallbackInterface.OnMove;
                 @Move.performed -= m_Wrapper.m_P2ActionsCallbackInterface.OnMove;
                 @Move.canceled -= m_Wrapper.m_P2ActionsCallbackInterface.OnMove;
+                @Attack.started -= m_Wrapper.m_P2ActionsCallbackInterface.OnAttack;
+                @Attack.performed -= m_Wrapper.m_P2ActionsCallbackInterface.OnAttack;
+                @Attack.canceled -= m_Wrapper.m_P2ActionsCallbackInterface.OnAttack;
+                @Jump.started -= m_Wrapper.m_P2ActionsCallbackInterface.OnJump;
+                @Jump.performed -= m_Wrapper.m_P2ActionsCallbackInterface.OnJump;
+                @Jump.canceled -= m_Wrapper.m_P2ActionsCallbackInterface.OnJump;
             }
             m_Wrapper.m_P2ActionsCallbackInterface = instance;
             if (instance != null)
@@ -882,6 +992,12 @@ public partial class @COconut : IInputActionCollection2, IDisposable
                 @Move.started += instance.OnMove;
                 @Move.performed += instance.OnMove;
                 @Move.canceled += instance.OnMove;
+                @Attack.started += instance.OnAttack;
+                @Attack.performed += instance.OnAttack;
+                @Attack.canceled += instance.OnAttack;
+                @Jump.started += instance.OnJump;
+                @Jump.performed += instance.OnJump;
+                @Jump.canceled += instance.OnJump;
             }
         }
     }
@@ -1039,10 +1155,14 @@ public partial class @COconut : IInputActionCollection2, IDisposable
     public interface IP1Actions
     {
         void OnMove(InputAction.CallbackContext context);
+        void OnAttack(InputAction.CallbackContext context);
+        void OnJump(InputAction.CallbackContext context);
     }
     public interface IP2Actions
     {
         void OnMove(InputAction.CallbackContext context);
+        void OnAttack(InputAction.CallbackContext context);
+        void OnJump(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {
