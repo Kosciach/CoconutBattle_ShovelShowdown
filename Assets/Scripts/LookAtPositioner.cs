@@ -11,7 +11,7 @@ public class LookAtPositioner : MonoBehaviour
 
     private void Update()
     {
-        float distance = Vector3.Distance(_source.position, _target.position);
-        transform.position = _source.position - _source.forward * (distance / 2);
+        Vector3 position = (_source.position + _target.position) / 2;
+        transform.position = position;
     }
 }

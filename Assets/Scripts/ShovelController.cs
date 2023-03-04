@@ -7,6 +7,7 @@ public class ShovelController : MonoBehaviour
     [SerializeField] Animator _shovelAnimator;
     [SerializeField] CoconutStateMachine OtherCoconutStateMachine;
     [SerializeField] CoconutStateMachine CoconutStateMachine;
+    [SerializeField] TrailRenderer _trailRenderer;
     [SerializeField] int _shovelIndex;
     [SerializeField] string _playerTag;
 
@@ -29,8 +30,14 @@ public class ShovelController : MonoBehaviour
     }
 
 
-
-
+    public void EnableTrail()
+    {
+        _trailRenderer.enabled = true;
+    }
+    public void DisableTrail()
+    {
+        _trailRenderer.enabled = false;
+    }
     public void EnableSwing()
     {
         _isSwing = true;
@@ -52,6 +59,7 @@ public class ShovelController : MonoBehaviour
         if (other.CompareTag(_playerTag) && _isSwing && !_wasHit)
         {
             OtherCoconutStateMachine.TakeDamage();
+            ShakeScript.Instance.Shake(2, 2);
             if (OtherCoconutStateMachine.Health <= 0)
             {
                 CoconutStateMachine.Winner = true;

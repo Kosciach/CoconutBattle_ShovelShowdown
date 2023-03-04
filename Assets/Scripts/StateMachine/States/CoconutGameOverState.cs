@@ -30,7 +30,7 @@ public class CoconutGameOverState : CoconutBaseState
     }
     public override void UpdateState()
     {
-        if (_ctx.Winner) _ctx.transform.Rotate(Vector3.up, 10f);
+        if (_ctx.Winner) _ctx.transform.Rotate(Vector3.up, 5f);
     }
     public override void FixedUpdateState()
     {
@@ -44,5 +44,4 @@ public class CoconutGameOverState : CoconutBaseState
     {
 
     }
-
 }

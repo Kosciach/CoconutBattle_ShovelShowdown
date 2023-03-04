@@ -120,8 +120,14 @@ public class CoconutStateMachine : MonoBehaviour
         }
         else if (_currentStateName == "GameOver")
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            StartCoroutine(ReloadGame());
         }
+    }
+
+    IEnumerator ReloadGame()
+    {
+        yield return new WaitForSeconds(2);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     private void OnEnable()
