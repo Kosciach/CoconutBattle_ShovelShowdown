@@ -13,6 +13,7 @@ public class CoconutGameOverState : CoconutBaseState
 
     public override void EnterState()
     {
+        Time.timeScale = 1f;
         _ctx.LookAtPositioner.enabled = false;
         _ctx.ShovelController.enabled = false;
         _ctx.CoconutRotator.enabled = false;
@@ -25,13 +26,17 @@ public class CoconutGameOverState : CoconutBaseState
         {
             _ctx.Rigidbody.freezeRotation = false;
             _ctx.ShovelController.GetComponent<Rigidbody>().isKinematic = false;
-            _ctx.ShovelController.GetComponent<BoxCollider>().isTrigger = false;
         }
         else
         {
+            _ctx.Shovel.parent = _ctx.transform;
+            _ctx.Shovel.localPosition = new Vector3(-0.303999782f, 0.109999977f, -0.132999957f);
+            _ctx.Shovel.localRotation = Quaternion.Euler(new Vector3(308.328156f, 39.0523949f, 75.0800476f));
+
             _ctx.CanvasController.SetWinner(_ctx.CoconutIndex+1);
             _ctx.LookAtPositioner.transform.LeanMove(_ctx.transform.position, 0.2f).setEaseInBounce();
             _ctx.ShovelController.EnableTrail();
+            _ctx.Rigidbody.velocity = Vector3.zero;
         }
     }
     public override void UpdateState()
