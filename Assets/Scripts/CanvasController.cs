@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class CanvasController : MonoBehaviour
 {
     [SerializeField] GameObject[] _menus;
     [SerializeField] RectTransform _planksHolder;
+    [SerializeField] GameObject _winnerScreen;
 
     public delegate void CanvasEvent();
     public static event CanvasEvent StartGame;
@@ -26,9 +28,16 @@ public class CanvasController : MonoBehaviour
         Application.Quit();
     }
 
+    public void SetWinner(int winnerIndex)
+    {
+        _winnerScreen.transform.GetChild(0).GetChild(0).GetComponent<TextMeshProUGUI>().text = "Winner: P" + winnerIndex.ToString();
+        _winnerScreen.SetActive(true);
+    }
 
-
-
+    public void OpenLink(string link)
+    {
+        Application.OpenURL(link);
+    }
 
 
     private void DropPlanksDown()

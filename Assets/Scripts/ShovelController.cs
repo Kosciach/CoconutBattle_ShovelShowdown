@@ -33,10 +33,12 @@ public class ShovelController : MonoBehaviour
     public void EnableTrail()
     {
         _trailRenderer.enabled = true;
+        AudioController.Instance.PlaySound(3);
     }
     public void DisableTrail()
     {
         _trailRenderer.enabled = false;
+        Time.timeScale = 1f;
     }
     public void EnableSwing()
     {
@@ -59,7 +61,9 @@ public class ShovelController : MonoBehaviour
         if (other.CompareTag(_playerTag) && _isSwing && !_wasHit)
         {
             OtherCoconutStateMachine.TakeDamage();
-            ShakeScript.Instance.Shake(2, 2);
+            ShakeScript.Instance.Shake(5, 2);
+            AudioController.Instance.PlaySound(2);
+            Time.timeScale = 0.5f;
             if (OtherCoconutStateMachine.Health <= 0)
             {
                 CoconutStateMachine.Winner = true;

@@ -27,10 +27,16 @@ public class CoconutGameOverState : CoconutBaseState
             _ctx.ShovelController.GetComponent<Rigidbody>().isKinematic = false;
             _ctx.ShovelController.GetComponent<BoxCollider>().isTrigger = false;
         }
+        else
+        {
+            _ctx.CanvasController.SetWinner(_ctx.CoconutIndex+1);
+            _ctx.LookAtPositioner.transform.LeanMove(_ctx.transform.position, 0.2f).setEaseInBounce();
+            _ctx.ShovelController.EnableTrail();
+        }
     }
     public override void UpdateState()
     {
-        if (_ctx.Winner) _ctx.transform.Rotate(Vector3.up, 5f);
+        if (_ctx.Winner) _ctx.transform.Rotate(Vector3.up, 500f * Time.deltaTime);
     }
     public override void FixedUpdateState()
     {

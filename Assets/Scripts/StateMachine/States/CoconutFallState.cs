@@ -13,6 +13,7 @@ public class CoconutFallState : CoconutBaseState
     public override void EnterState()
     {
         _ctx.Rigidbody.isKinematic = false;
+        AudioController.Instance.PlaySound(1);
         _ctx.FallSwitch = false;
     }
     public override void UpdateState()

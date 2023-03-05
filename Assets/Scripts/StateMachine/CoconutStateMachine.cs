@@ -31,7 +31,7 @@ public class CoconutStateMachine : MonoBehaviour
     [SerializeField] LookAtPositioner _lookAtPositioner; public LookAtPositioner LookAtPositioner { get { return _lookAtPositioner; } set { _lookAtPositioner = value; } }
     [SerializeField] CoconutRotator _coconutRotator; public CoconutRotator CoconutRotator { get { return _coconutRotator; } set { _coconutRotator = value; } }
     [SerializeField] CoconutStateMachine _otherCoconutStateMachine; public CoconutStateMachine OtherCoconutStateMachine { get { return _otherCoconutStateMachine; } set { _otherCoconutStateMachine = value; } }
-
+    [SerializeField] CanvasController _canvasController; public CanvasController CanvasController { get { return _canvasController; } set { _canvasController = value; } }
 
 
     [Space(20)]

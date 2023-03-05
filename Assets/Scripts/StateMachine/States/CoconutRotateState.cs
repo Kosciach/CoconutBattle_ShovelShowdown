@@ -12,6 +12,7 @@ public class CoconutRotateState : CoconutBaseState
 
     public override void EnterState()
     {
+        AudioController.Instance.PlaySound(0);
         LeanTween.rotate(_ctx.gameObject, _ctx.RotationTarget, 0.5f).setOnComplete(() =>
         {
             _ctx.Shovel.parent = _ctx.transform;
