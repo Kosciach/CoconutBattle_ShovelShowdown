@@ -9,6 +9,7 @@
 
   <p align="center">
     Created for Mini Jame Gam #15.<br>
+    Game for two players where you and your friend play as coconuts fighting each other with shovels on a small island.
   </p>
 
 <br>
