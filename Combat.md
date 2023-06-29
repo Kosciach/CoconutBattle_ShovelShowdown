@@ -1,4 +1,4 @@
-<h2 align="center">Combat</h2>
+<h1 align="center">Combat</h1>
 
 
 <br>
